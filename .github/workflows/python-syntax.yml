@@ -22,19 +22,22 @@ jobs:
       matrix:
         python_version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
+      - id: checkout
+        name: Checkout PR
+        uses: actions/checkout@v4
+
       - id: setup
         name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python_version }}
+          cache: pip
+
+      - run: pip install -e . -r requirements/dev-${{ matrix.python_version }}.txt
 
       - id: install
         name: Install Deps
         run: pip3 install black==25.1.0
-
-      - id: checkout
-        name: Checkout PR
-        uses: actions/checkout@v4
 
       - id: check
         name: Check format

@@ -41,14 +41,15 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           build-args: |
-            - SC_PYTHON_VERSION=${{ matrix.python_version }}
+            SC_PYTHON_VERSION=${{ matrix.python_version }}
+          cache-from: type=gha
+          cache-to: type=gha
+          load: true
+          tags: hedwig-python-${{ matrix.python_version }}:latest
 
       - name: Run Pytest
-        run: make test
+        run: make build test docs
         env:
           GITHUB_CI: true
           ISOLATED_BACKEND_TEST: ${{ matrix.isolated_backend_test }}
