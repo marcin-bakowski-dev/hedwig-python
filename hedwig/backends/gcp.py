@@ -263,6 +263,7 @@ class GooglePubSubConsumerBackend(HedwigConsumerBaseBackend):
         flow_control: FlowControl = FlowControl(
             max_messages=num_messages,
             max_duration_per_lease_extension=visibility_timeout or DEFAULT_VISIBILITY_TIMEOUT_S,
+            max_lease_duration=settings.GOOGLE_PUBSUB_MAX_LEASE_DURATION_S,
         )
 
         for subscription_path in self._subscription_paths:
