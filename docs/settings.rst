@@ -74,6 +74,12 @@ however it may be overridden if Pub/Sub resources live in a different project.
 
 optional; string; Google only
 
+**GOOGLE_PUBSUB_MAX_LEASE_DURATION_S**
+
+The maximum amount of time in seconds to hold a lease on a message before dropping it from the lease management. Defaults to 3600s (1 hour).
+
+optional: int; default: 3600; Google only
+
 **GOOGLE_PUBSUB_READ_TIMEOUT_S**
 
 Read from PubSub subscription timeout in seconds
